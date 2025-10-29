@@ -13,9 +13,17 @@ Welcome to the comprehensive DevOps and System Architecture course. This reposit
    - Best practices
    - Real-world examples
 
+2. [Introduction to DevOps](./lectures/02_devops_introduction.md)
+   - What is DevOps
+   - DevOps lifecycle
+   - DevOps principles (CALMS)
+   - DevOps practices
+   - Tools and technologies
+   - Best practices and implementation
+
 ### Upcoming Lectures
 
-2. DNS (Domain Name System)
+3. DNS (Domain Name System)
 3. Load Balancers
 4. Synchronous vs Asynchronous Communication
 5. SQL vs NoSQL Databases
