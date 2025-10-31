@@ -124,25 +124,24 @@ mindmap
       Fast Feedback
       Value Delivery
       User Focus
+    The Three Ways:::green
+      Flow
+      Feedback
+      Continuous Learning
+    CALMS Framework:::orange
+      Culture
+      Automation
+      Lean
+      Measurement
+      Sharing
 
 classDef blue fill:#EAF2FF,stroke:#A6BCE0,color:#333,fontWeight:bold;
 classDef pink fill:#FFE8E8,stroke:#E0B4B4,color:#333,fontWeight:bold;
-classDef purple fill:#F9E8FF,stroke:#D7A6E0,color:#333,fontWeight:bold;
+classDef purple fill:#F4E8FF,stroke:#D1B3E0,color:#333,fontWeight:bold;
 classDef yellow fill:#FFF9E5,stroke:#E0D7A6,color:#333,fontWeight:bold;
+classDef green fill:#E6FAE6,stroke:#A6D8A6,color:#333,fontWeight:bold;
+classDef orange fill:#FFF1E0,stroke:#E0BFA6,color:#333,fontWeight:bold;
 
-```
-
-1. **The Three Ways**
-   - **Flow**: Left to right
-   - **Feedback**: Right to left
-   - **Continuous Learning**: Experimentation and practice
-
-2. **CALMS Framework**
-   - Culture
-   - Automation
-   - Lean
-   - Measurement
-   - Sharing
 
 ## DevOps Practices
 
