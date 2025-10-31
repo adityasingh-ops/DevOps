@@ -21,9 +21,17 @@ Welcome to the comprehensive DevOps and System Architecture course. This reposit
    - Tools and technologies
    - Best practices and implementation
 
+3. [Essential Commands and AWS Setup](./lectures/03_essential_commands.md)
+   - Basic Linux commands
+   - File and process management
+   - AWS setup and SSH access
+   - Docker basics
+   - Practical examples and troubleshooting
+   - Best practices and security
+
 ### Upcoming Lectures
 
-3. DNS (Domain Name System)
+4. DNS (Domain Name System)
 3. Load Balancers
 4. Synchronous vs Asynchronous Communication
 5. SQL vs NoSQL Databases
