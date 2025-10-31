@@ -3,9 +3,9 @@
 ## Navigation Map
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff", "fontFamily": "Inter, sans-serif"}}}%%
 mindmap
-  root((AWS & Linux
-    Essentials))
+  root((AWS & Linux Essentials))
     Linux Fundamentals
       Basic Commands
       File Management
@@ -31,12 +31,7 @@ mindmap
       Image Management
       Networking
       Volumes
-
-# AWS Console Guide
-
-## 1. AWS Management Console Overview
-
-```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff", "fontFamily": "Inter, sans-serif"}}}%%
 graph TB
     A[AWS Console Login] --> B[Service Selection]
     B --> C[Region Selection]
@@ -54,7 +49,7 @@ graph TB
         E --> E2[Storage]
         E --> E3[Networking]
     end
-```
+
 
 ### 1.1 Console Navigation
 
@@ -223,6 +218,7 @@ aws s3 sync local/ s3://bucket/  # Sync directory
 ## 8. Best Practices and Security
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff"}}}%%
 mindmap
   root((Security
     Best Practices))
