@@ -105,42 +105,34 @@ graph LR
 ## DevOps Principles
 
 ```mermaid
-%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Inter, sans-serif", "textColor": "#333", "fontSize": "14px"}}}%%
 mindmap
   root((DevOps Principles))
-    Automation:::blue
+    Automation
       CI/CD
       Testing
       Infrastructure
-    Collaboration:::pink
+    Collaboration
       Shared Responsibility
       Cross-functional Teams
       Communication
-    Continuous Learning:::purple
+    Continuous Learning
       Feedback Loops
       Knowledge Sharing
       Improvement
-    Customer-Centric:::yellow
+    Customer-Centric
       Fast Feedback
       Value Delivery
       User Focus
-    The Three Ways:::green
+    The Three Ways
       Flow
       Feedback
       Continuous Learning
-    CALMS Framework:::orange
+    CALMS Framework
       Culture
       Automation
       Lean
       Measurement
       Sharing
-
-classDef blue fill:#EAF2FF,stroke:#A6BCE0,color:#333,fontWeight:bold;
-classDef pink fill:#FFE8E8,stroke:#E0B4B4,color:#333,fontWeight:bold;
-classDef purple fill:#F4E8FF,stroke:#D1B3E0,color:#333,fontWeight:bold;
-classDef yellow fill:#FFF9E5,stroke:#E0D7A6,color:#333,fontWeight:bold;
-classDef green fill:#E6FAE6,stroke:#A6D8A6,color:#333,fontWeight:bold;
-classDef orange fill:#FFF1E0,stroke:#E0BFA6,color:#333,fontWeight:bold;
 
 
 ## DevOps Practices
