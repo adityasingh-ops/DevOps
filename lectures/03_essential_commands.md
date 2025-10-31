@@ -32,6 +32,9 @@ mindmap
       Networking
       Volumes
 
+    end
+```
+
 # AWS Console Guide
 
 ## 1. AWS Management Console Overview
