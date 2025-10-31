@@ -3,6 +3,7 @@
 ## Navigation Map
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff"}}}%%
 mindmap
   root((AWS & Linux
     Essentials))
