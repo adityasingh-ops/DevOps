@@ -105,6 +105,7 @@ style M fill:#EAF2FF,stroke:#A6BCE0,color:#333333
 ## DevOps Principles
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff"}}}%%
 mindmap
   root((DevOps Principles))
     Automation
@@ -176,6 +177,7 @@ graph LR
 ## Tools in DevOps
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"textColor": "#ffffff"}}}%%
 mindmap
   root((DevOps Tools))
     Source Control
