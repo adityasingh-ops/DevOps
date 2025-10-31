@@ -103,17 +103,17 @@ graph TD
 
 ```mermaid
 graph TD
-    root[/] --> bin[/bin]
-    root --> etc[/etc]
-    root --> home[/home]
-    root --> usr[/usr]
-    root --> var[/var]
+    root["/"] --> bin["bin"]
+    root --> etc["etc"]
+    root --> home["home"]
+    root --> usr["usr"]
+    root --> var["var"]
     
-    home --> user1[/user1]
-    home --> user2[/user2]
+    home --> user1["user1"]
+    home --> user2["user2"]
     
-    etc --> config[Configuration Files]
-    var --> logs[System Logs]
+    etc --> config["Configuration Files"]
+    var --> logs["System Logs"]
 ```
 
 ## 4. AWS Service Architecture
