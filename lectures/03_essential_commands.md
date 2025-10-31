@@ -1,11 +1,300 @@
-# Lecture 3: Essential Commands and AWS Setup Guide
+# Lecture 3: Essential Commands and AWS Platform Guide
 
-## Table of Contents
-1. [Basic Linux Commands](#basic-linux-commands)
-2. [File Management](#file-management)
-3. [Process Management](#process-management)
-4. [AWS Setup and SSH Access](#aws-setup-and-ssh-access)
-5. [Docker Basic Commands](#docker-basic-commands)
+## Navigation Map
+
+```mermaid
+mindmap
+  root((AWS & Linux
+    Essentials))
+    Linux Fundamentals
+      Basic Commands
+      File Management
+      Process Management
+      Permissions
+    AWS Console
+      UI Navigation
+      Services Overview
+      IAM Setup
+      Regions & AZ
+    EC2 Management
+      Instance Launch
+      SSH Access
+      Security Groups
+      Key Management
+    AWS CLI
+      Installation
+      Configuration
+      Basic Commands
+      Best Practices
+    Docker Basics
+      Container Ops
+      Image Management
+      Networking
+      Volumes
+
+# AWS Console Guide
+
+## 1. AWS Management Console Overview
+
+```mermaid
+graph TB
+    A[AWS Console Login] --> B[Service Selection]
+    B --> C[Region Selection]
+    B --> D[IAM & Security]
+    B --> E[Resource Management]
+    
+    subgraph "Key Areas"
+        C --> C1[Global vs Regional]
+        C --> C2[Availability Zones]
+        
+        D --> D1[Users & Groups]
+        D --> D2[Roles & Policies]
+        
+        E --> E1[EC2 Instances]
+        E --> E2[Storage]
+        E --> E3[Networking]
+    end
+```
+
+### 1.1 Console Navigation
+
+```mermaid
+graph LR
+    A[Navigation Bar] --> B[Services Menu]
+    A --> C[Search Bar]
+    A --> D[Region Selector]
+    B --> E[Recently Visited]
+    B --> F[All Services]
+    B --> G[Resource Groups]
+```
+
+### 1.2 Essential UI Elements
+1. **Top Navigation Bar**
+   - Services dropdown
+   - Search functionality
+   - Region selector
+   - Account information
+   - Support center
+
+2. **Service Dashboard**
+   - Service overview
+   - Quick access links
+   - Resource summaries
+   - Recent activities
+
+## 2. Linux Command Structure
+
+```mermaid
+graph TD
+    A[Command Structure] --> B[Command Name]
+    A --> C[Options/Flags]
+    A --> D[Arguments]
+    
+    B --> E[Example: ls]
+    C --> F[Example: -la]
+    D --> G[Example: /path]
+```
+
+## 3. File System Hierarchy
+
+```mermaid
+graph TD
+    root[/] --> bin[/bin]
+    root --> etc[/etc]
+    root --> home[/home]
+    root --> usr[/usr]
+    root --> var[/var]
+    
+    home --> user1[/user1]
+    home --> user2[/user2]
+    
+    etc --> config[Configuration Files]
+    var --> logs[System Logs]
+```
+
+## 4. AWS Service Architecture
+
+```mermaid
+graph TB
+    subgraph "Global Infrastructure"
+        R[Regions] --> AZ[Availability Zones]
+        AZ --> DC[Data Centers]
+    end
+    
+    subgraph "Core Services"
+        EC2[EC2 Instances]
+        S3[S3 Storage]
+        RDS[Databases]
+        VPC[Networking]
+    end
+    
+    subgraph "Security"
+        IAM[Identity & Access]
+        SG[Security Groups]
+        KMS[Key Management]
+    end
+```
+
+## 5. EC2 Instance Management
+
+### 5.1 Launch Process Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Console
+    participant EC2
+    participant VPC
+    
+    User->>Console: Select AMI
+    Console->>EC2: Configure Instance
+    EC2->>VPC: Configure Network
+    VPC->>EC2: Assign Security Group
+    EC2->>Console: Review & Launch
+    Console->>User: Download Key Pair
+    User->>EC2: Launch Instance
+```
+
+### 5.2 Security Group Configuration
+
+```mermaid
+graph LR
+    subgraph "Security Group Rules"
+        I[Inbound Rules] --> P1[Port 22 - SSH]
+        I --> P2[Port 80 - HTTP]
+        I --> P3[Port 443 - HTTPS]
+        
+        O[Outbound Rules] --> A[Allow All]
+    end
+```
+
+## 6. AWS CLI Workflow
+
+```mermaid
+graph LR
+    subgraph "CLI Setup"
+        A[Install AWS CLI] --> B[Configure Credentials]
+        B --> C[Set Default Region]
+    end
+    
+    subgraph "Common Operations"
+        D[EC2 Management] --> D1[Launch]
+        D --> D2[Monitor]
+        D --> D3[Terminate]
+        
+        E[S3 Operations] --> E1[Upload]
+        E --> E2[Download]
+        E --> E3[List]
+    end
+```
+
+## 7. Essential Commands Reference
+
+### 7.1 Linux File Operations
+```bash
+# Basic File Operations
+ls -la                # List all files with details
+pwd                   # Print working directory
+cd /path/to/dir      # Change directory
+mkdir -p dir/subdir  # Create directory structure
+touch file.txt       # Create empty file
+cp source dest       # Copy files
+mv source dest       # Move/rename files
+rm -rf dir           # Remove directory and contents
+```
+
+### 7.2 AWS CLI Essential Commands
+```bash
+# AWS CLI Configuration
+aws configure                 # Set up AWS credentials
+aws configure list           # View current configuration
+
+# EC2 Operations
+aws ec2 describe-instances   # List EC2 instances
+aws ec2 start-instances     # Start EC2 instance
+aws ec2 stop-instances      # Stop EC2 instance
+
+# S3 Operations
+aws s3 ls                    # List buckets
+aws s3 cp file.txt s3://bucket/  # Upload file
+aws s3 sync local/ s3://bucket/  # Sync directory
+```
+
+## 8. Best Practices and Security
+
+```mermaid
+mindmap
+  root((Security
+    Best Practices))
+    Access Control
+      Least Privilege
+      MFA
+      Regular Rotation
+    Network Security
+      VPC Design
+      Security Groups
+      NACLs
+    Data Protection
+      Encryption
+      Backup
+      Monitoring
+    Compliance
+      Auditing
+      Logging
+      Standards
+```
+
+## 9. Troubleshooting Guide
+
+```mermaid
+flowchart TD
+    A[Issue Detected] --> B{Check Type}
+    B -->|Connectivity| C[Network Issues]
+    B -->|Permission| D[IAM/Security]
+    B -->|Performance| E[Resource Usage]
+    
+    C --> C1[Check Security Groups]
+    C --> C2[Verify VPC Settings]
+    
+    D --> D1[Verify IAM Roles]
+    D --> D2[Check Policies]
+    
+    E --> E1[Monitor CloudWatch]
+    E --> E2[Check Resource Limits]
+```
+
+## 10. Further Resources
+
+### 10.1 Learning Path
+
+```mermaid
+graph LR
+    A[Basics] --> B[Intermediate]
+    B --> C[Advanced]
+    
+    subgraph "Basics"
+        A1[Linux Commands]
+        A2[AWS Console]
+        A3[Security Basics]
+    end
+    
+    subgraph "Intermediate"
+        B1[AWS CLI]
+        B2[Automation]
+        B3[Monitoring]
+    end
+    
+    subgraph "Advanced"
+        C1[Architecture]
+        C2[Best Practices]
+        C3[Optimization]
+    end
+```
+
+### 10.2 Documentation Links
+- [AWS Documentation](https://docs.aws.amazon.com/)
+- [Linux Command Library](https://linuxcommandlibrary.com/)
+- [Docker Documentation](https://docs.docker.com/)
 
 ## Basic Linux Commands
 
