@@ -49,14 +49,14 @@ graph LR
     O --> M[Monitor]
     M --> P
 
-   style P fill:#F2F7FF,stroke:#BFC8D7,color:#333333
-   style C fill:#FFE8E8,stroke:#E0B4B4,color:#333333
-   style B fill:#E8E8FF,stroke:#B4B4E0,color:#333333
-   style T fill:#FFF9E5,stroke:#E0D7A6,color:#333333
-   style R fill:#F9E8FF,stroke:#D7A6E0,color:#333333
-   style D fill:#E8F9FF,stroke:#A6D7E0,color:#333333
-   style O fill:#FFF1E3,stroke:#E0B78E,color:#333333
-   style M fill:#EAF2FF,stroke:#A6BCE0,color:#333333
+style P fill:#F2F7FF,stroke:#BFC8D7,color:#333333
+style C fill:#FFE8E8,stroke:#E0B4B4,color:#333333
+style B fill:#E8E8FF,stroke:#B4B4E0,color:#333333
+style T fill:#FFF9E5,stroke:#E0D7A6,color:#333333
+style R fill:#F9E8FF,stroke:#D7A6E0,color:#333333
+style D fill:#E8F9FF,stroke:#A6D7E0,color:#333333
+style O fill:#FFF1E3,stroke:#E0B78E,color:#333333
+style M fill:#EAF2FF,stroke:#A6BCE0,color:#333333
 
 ```
 
@@ -123,17 +123,19 @@ mindmap
       Fast Feedback
       Value Delivery
       User Focus
-    The Three Ways
-      Flow
-      Feedback
-      Continuous Learning
-    CALMS Framework
-      Culture
-      Automation
-      Lean
-      Measurement
-      Sharing
+```
 
+1. **The Three Ways**
+   - **Flow**: Left to right
+   - **Feedback**: Right to left
+   - **Continuous Learning**: Experimentation and practice
+
+2. **CALMS Framework**
+   - Culture
+   - Automation
+   - Lean
+   - Measurement
+   - Sharing
 
 ## DevOps Practices
 
