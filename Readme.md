@@ -22,22 +22,30 @@ Welcome to the comprehensive DevOps and System Architecture course. This reposit
    - Best practices and implementation
 
 3. [Essential Commands and AWS Setup](./lectures/03_essential_commands.md)
-   - Basic Linux commands
-   - File and process management
-   - AWS setup and SSH access
-   - Docker basics
-   - Practical examples and troubleshooting
-   - Best practices and security
+    - Basic Linux commands
+    - File and process management
+    - AWS setup and SSH access (UI + CLI)
+    - Docker basics
+    - Practical examples and troubleshooting
+    - Best practices and security
+
+4. [Shell Scripting — Practical Notes and Exercises](./lectures/04_shell_scripting.md)
+    - Hello World and shebangs
+    - Useful scripts (date, disk, file checks, backups)
+    - String ops, control flow, functions
+    - User management scripts (safe patterns)
+    - ACLs: check, set, default, mask, examples
+    - Assignment: `utils.sh` + `setup_project.sh`
 
 ### Upcoming Lectures
 
-4. DNS (Domain Name System)
-3. Load Balancers
-4. Synchronous vs Asynchronous Communication
-5. SQL vs NoSQL Databases
-6. API Gateway
-7. Externalizing Logs
-8. 12 Factor Apps
+5. DNS (Domain Name System)
+6. Load Balancers
+7. Synchronous vs Asynchronous Communication
+8. SQL vs NoSQL Databases
+9. API Gateway
+10. Externalizing Logs
+11. 12 Factor Apps
 
 ## Getting Started
 
