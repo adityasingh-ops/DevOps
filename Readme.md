@@ -1,80 +1,50 @@
-# DevOps and System Architecture Course
+# DevOps & System Architecture — Course Guide
 
-Welcome to the comprehensive DevOps and System Architecture course. This repository contains detailed lectures and materials covering essential concepts in modern software architecture and DevOps practices.
+Welcome — this repo is a compact course folder with short, practical lectures and diagrams you can read or run locally.
 
-## Course Structure
+## Quick start
 
-### Completed Lectures
+- Open `lectures/` and pick a numbered lecture to start (1 → 4 so far).
+- Use VS Code Markdown preview to render Mermaid diagrams.
+- For hands-on scripts, see `lectures/04_shell_scripting.md` and copy the example scripts into an `examples/` folder (optional).
 
-1. [Introduction to Microservices Architecture](./lectures/01_microservices_architecture.md)
-   - Understanding microservices
-   - Key characteristics
-   - Benefits and challenges
-   - Best practices
-   - Real-world examples
+## Course map (intuitive)
 
-2. [Introduction to DevOps](./lectures/02_devops_introduction.md)
-   - What is DevOps
-   - DevOps lifecycle
-   - DevOps principles (CALMS)
-   - DevOps practices
-   - Tools and technologies
-   - Best practices and implementation
+- Lecture 1 — Microservices architecture: concepts, diagrams, pros/cons.
+- Lecture 2 — DevOps introduction: culture, lifecycle, principles, tools.
+- Lecture 3 — Essential commands & AWS: CLI + Console basics, Docker quick-ops.
+- Lecture 4 — Shell scripting: recipes, examples, ACLs, assignment (utils + setup scripts).
 
-3. [Essential Commands and AWS Setup](./lectures/03_essential_commands.md)
-    - Basic Linux commands
-    - File and process management
-    - AWS setup and SSH access (UI + CLI)
-    - Docker basics
-    - Practical examples and troubleshooting
-    - Best practices and security
+## Today's progress / study note
 
-4. [Shell Scripting — Practical Notes and Exercises](./lectures/04_shell_scripting.md)
-    - Hello World and shebangs
-    - Useful scripts (date, disk, file checks, backups)
-    - String ops, control flow, functions
-    - User management scripts (safe patterns)
-    - ACLs: check, set, default, mask, examples
-    - Assignment: `utils.sh` + `setup_project.sh`
+- Studied: DevOps culture and SDLC integration.
+- Takeaway: "DevOps is a culture and set of practices focused on delivering applications faster while maintaining higher quality and testability across the SDLC (collaboration + automation + measurement)."
 
-### Upcoming Lectures
+## How to use this repo
 
-5. DNS (Domain Name System)
-6. Load Balancers
-7. Synchronous vs Asynchronous Communication
-8. SQL vs NoSQL Databases
-9. API Gateway
-10. Externalizing Logs
-11. 12 Factor Apps
+1. Preview: open any `lectures/*.md` in VS Code and toggle Markdown preview (Ctrl/Cmd+Shift+V).
+2. Run examples: copy script snippets from the lecture into a file, make it executable and run:
 
-## Getting Started
-
-Each lecture is contained in its own markdown file in the `lectures` directory. The lectures include:
-- Detailed explanations
-- Visual diagrams using Mermaid
-- Real-world examples
-- Best practices
-- Further reading suggestions
-
-```mermaid
-graph LR
-    A[Start Here] --> B[Read README]
-    B --> C[Choose Lecture]
-    C --> D[Study Material]
-    D --> E[Practice Concepts]
-    E --> C
+```bash
+chmod +x script.sh
+./script.sh
 ```
 
-Key characteristics:
-- Independently deployable services
-- Decentralized data management
-- Built around business capabilities
-- Failure isolation
-- Scalable components
+3. If a lecture refers to `utils.sh` or `setup_project.sh`, create them under an `examples/` folder or run them directly from lecture instructions.
 
-## 2. DNS (Domain Name System)
+## Where to go next
 
-DNS is the internet's phonebook that translates human-readable domain names into IP addresses.
+- Want runnable examples added? I can create an `examples/` folder with each script as a separate file.
+- Want CI checks? I can add a simple GitHub Actions workflow to run `shellcheck` on `.sh` files.
+
+## Getting Started (details)
+
+Each lecture is contained in its own markdown file in the `lectures` directory. The lectures include:
+- detailed explanations
+- mermaid diagrams for visualization
+- practical examples and copy-pasteable scripts
+- best practices and further reading
+
 
 ```mermaid
 sequenceDiagram

@@ -14,6 +14,11 @@ graph LR
     end
 ```
 
+### Today's takeaway
+
+DevOps is a culture and set of practices focused on delivering applications faster while maintaining higher quality and testability across the software development lifecycle (SDLC). This emphasizes collaboration, automation, measurement and continuous improvement to make delivery predictable and resilient.
+
+
 ## Why Do You Need DevOps?
 
 1. **Faster Time to Market**
