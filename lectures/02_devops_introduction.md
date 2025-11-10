@@ -16,7 +16,140 @@ graph LR
 
 ### Today's takeaway
 
-DevOps is a culture and set of practices focused on delivering applications faster while maintaining higher quality and testability across the software development lifecycle (SDLC). This emphasizes collaboration, automation, measurement and continuous improvement to make delivery predictable and resilient.
+DevOps is a culture and set of practices focused on delivering applications faster while maintaining higher quality and testability across the software development lifecycle (SDLC). This emphasizes collaboration, automation, measurement and continuous improvement to make delivery predictable and resilient. Key enablers include Jira for agile workflow management and virtual machines for efficient resource utilization.
+
+## Agile Project Management with Jira
+
+### Understanding Jira Workflow
+
+```mermaid
+graph TD
+    E[Epic] --> S1[Story 1]
+    E --> S2[Story 2]
+    S1 --> T1[Task 1.1]
+    S1 --> T2[Task 1.2]
+    S2 --> T3[Task 2.1]
+    
+    subgraph "Workflow States"
+        TO[To Do] --> IP[In Progress]
+        IP --> R[Review]
+        R --> D[Done]
+    end
+```
+
+### Hierarchy of Work Items
+
+1. **Epic**
+   - Large body of work
+   - Can span multiple sprints
+   - Example: "User Authentication System"
+
+2. **Story**
+   - User-centric feature description
+   - Completable within one sprint
+   - Example: "As a user, I can reset my password"
+
+3. **Task**
+   - Specific technical work items
+   - Usually assigned to one person
+   - Example: "Implement password reset API endpoint"
+
+### Scrum Team Workflow
+
+```mermaid
+graph LR
+    PO[Product Owner] -->|Creates| B[Backlog]
+    B -->|Sprint Planning| S[Sprint]
+    S -->|Daily Standup| T[Team]
+    T -->|Review & Retro| D[Done]
+```
+
+1. **Sprint Planning**
+   - Select stories for sprint
+   - Break into tasks
+   - Estimate effort
+
+2. **Daily Work**
+   - Update ticket status
+   - Log work hours
+   - Add comments and attachments
+
+3. **Board Views**
+   - Scrum board
+   - Kanban board
+   - Backlog view
+
+## Virtual Machines in DevOps
+
+### Understanding Virtual Machines
+
+```mermaid
+graph TD
+    subgraph "Physical Server"
+        H[Hypervisor]
+        H --> VM1[Virtual Machine 1]
+        H --> VM2[Virtual Machine 2]
+        H --> VM3[Virtual Machine 3]
+        
+        subgraph "VM1"
+            OS1[OS]
+            A1[App 1]
+        end
+        
+        subgraph "VM2"
+            OS2[OS]
+            A2[App 2]
+        end
+        
+        subgraph "VM3"
+            OS3[OS]
+            A3[App 3]
+        end
+    end
+```
+
+### VM vs Physical Server
+
+| Aspect | Physical Server | Virtual Machine |
+|--------|----------------|-----------------|
+| Resource Utilization | Often underutilized | Efficient sharing |
+| Scalability | Hardware limited | Easy to scale |
+| Cost | High upfront | Pay as you go |
+| Deployment Time | Days/Weeks | Minutes |
+| Maintenance | Complex | Simplified |
+
+### Cloud VMs (e.g., AWS EC2)
+
+1. **Benefits**
+   - On-demand provisioning
+   - Pay-per-use pricing
+   - Multiple instance types
+   - Geographic distribution
+
+2. **Common Uses**
+   - Application servers
+   - Development environments
+   - Testing environments
+   - CI/CD runners
+
+3. **Management Features**
+   - Auto-scaling
+   - Load balancing
+   - Snapshots and backups
+   - Security groups
+
+```mermaid
+graph LR
+    subgraph "AWS Cloud"
+        VPC[VPC] --> EC2_1[EC2 Instance 1]
+        VPC --> EC2_2[EC2 Instance 2]
+        LB[Load Balancer] --> EC2_1
+        LB --> EC2_2
+        ASG[Auto Scaling Group]
+    end
+    
+    U[Users] --> LB
+```
 
 
 ## Why Do You Need DevOps?
