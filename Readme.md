@@ -14,6 +14,7 @@ Welcome — this repo is a compact course folder with short, practical lectures 
 - Lecture 2 — DevOps introduction: culture, lifecycle, principles, tools.
 - Lecture 3 — Essential commands & AWS: CLI + Console basics, Docker quick-ops.
 - Lecture 4 — Shell scripting: recipes, examples, ACLs, assignment (utils + setup scripts).
+- Lecture 5 — Git basics: local vs remote vs distributed, install, init, clone, add, commit, push, log, diff, branching, and more.
 
 ## Today's progress / study note
 
