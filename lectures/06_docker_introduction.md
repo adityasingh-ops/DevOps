@@ -1,93 +1,179 @@
 # Lecture 6: Introduction to Containerization & Docker
 
-## Navigation map
+## Quick overview
 
 ```mermaid
 mindmap
-  root((Containerization & Docker))
+  root((Docker & Containers))
     Concept
-      What is containerization
-      Containers vs VMs
-    Docker
-      Architecture
-      Components
-      Images & Containers
-    Commands
-      build
-      run
-      ps
-      logs
-    Orchestration
-      Compose
-      Kubernetes
-    Best Practices
-      Small images
-      Security
-      Multi-stage builds
+      What is container
+      Why use it
+      Simple analogy
+    Docker Basics
+      Images vs Containers
+      Dockerfile
+      Docker Engine
+    How to Use
+      Build images
+      Run containers
+      Volumes & Networking
+    Multiple Containers
+      Docker Compose
+      Services together
+    Production
+      Orchestration
+      Kubernetes basics
 ```
 
-## 1. What is containerization?
+---
 
-Containerization is a lightweight form of virtualization that packages an application and its dependencies together so it can run reliably across different computing environments. Containers share the host OS kernel but keep application files, libraries, and runtime isolated.
+## 1. What is containerization? (Simple)
 
-Advantages:
-- Portability: "it runs the same locally and in production"
-- Consistency: packaged dependencies avoid "works on my machine" issues
-- Fast startup: containers start in seconds
-- Density: more containers can run on a host than full VMs
+Containerization packages your application and everything it needs (code, libraries, settings) into a single unit that works anywhere.
 
-```mermaid
-graph LR
-    HostOS[Host OS] -->|runs| Containers[Containers]
-    Containers --> App1[App A]
-    Containers --> App2[App B]
-    Containers --> App3[App C]
+### Real-world analogy:
+
+**Shipping container (physical)**
+- Same box works on ships, trains, trucks
+- Contents protected and isolated
+- Standard size, easy to stack
+
+**Docker container (software)**
+- Same container works on laptop, server, cloud
+- App protected and isolated
+- Standard format, easy to run
+
+### Why is this useful?
+
+- **Consistency**: App runs the same everywhere
+- **No surprises**: "Works on my machine" problem is solved
+- **Portable**: Move between laptop and cloud easily
+- **Efficient**: Multiple containers on one machine
+
+---
+
+## 2. What is Docker? (Simply)
+
+Docker is the most popular tool for containerization. It makes building, packaging, and running containers easy.
+
+### Docker in one picture:
+
+```
+You write code → Dockerfile → docker build → Image → docker run → Container
+                (recipe)       (cook it)    (package) (start it) (running app)
 ```
 
-## 2. What is Docker?
+### Key parts of Docker:
 
-Docker is the most popular container platform. It provides tooling and a runtime to build, ship, and run containers.
-Key Docker components:
-- Docker Engine (daemon) — runs on the host and manages containers
-- Docker CLI — user tool to build/run/manage containers
-- Images — read-only templates used to create containers
-- Containers — runtime instances of images
-- Dockerfile — recipe that defines how to build an image
-- Registry (Docker Hub, private registries) — stores images
+| Part | What it is | Like... |
+|------|-----------|---------|
+| **Image** | Blueprint/template (doesn't change) | A class in programming |
+| **Container** | Running instance of image | An object/instance |
+| **Dockerfile** | Instructions to build image | A recipe for cooking |
+| **Docker Engine** | Software that runs containers | A kitchen that cooks |
+| **Registry (Hub)** | Online storage for images | GitHub for containers |
+
+---
 
 ## 3. Why do you need Docker?
 
-- Reproducible environments for development, testing, and production
-- Simplifies dependency management and deployment
-- Enables microservices architecture by packaging each service into its own container
-- Easier CI/CD pipelines and immutable deployments
-- Better resource efficiency than full VMs
+### Problem without Docker:
 
-## 4. Docker Architecture
+You build an app on your Mac with:
+- Node.js v18
+- PostgreSQL v14
+- Redis v6
+
+Your team member has:
+- Node.js v16 (different!)
+- PostgreSQL v15 (different!)
+- Redis v5 (different!)
+
+**Result**: App breaks on their machine ("works on my machine")
+
+### Solution with Docker:
+
+Package everything into a container:
+- Same Node.js version
+- Same PostgreSQL version
+- Same Redis version
+- Same everything
+
+**Result**: Works on their machine, your machine, production server, everywhere
+
+### Real benefits:
+
+1. **Consistency** — No surprises, same env everywhere
+2. **Easy deployment** — Just run the container, no installation
+3. **Microservices** — Package each service separately
+4. **Cloud-ready** — All clouds support Docker
+5. **Efficient** — Uses less resources than virtual machines
+
+---
+
+## 4. Docker Architecture (How it works)
+
+### Simple flow:
+
+```
+You type:         docker run myapp
+    ↓
+You (terminal)
+    ↓
+Docker CLI (command tool)
+    ↓
+Docker Engine (daemon = software running on machine)
+    ↓
+Creates and runs a container with your app
+```
+
+### Detailed diagram:
 
 ```mermaid
 graph LR
-    CLI[Docker CLI] -->|Docker API| Daemon[Docker Daemon / Engine]
-    Daemon -->|Runs| Containers[Containers]
-    Daemon -->|Pull/Push| Registry[Image Registry]
-    Daemon --> Storage[Container Storage]
-    Daemon --> Network[Docker Network]
+    User["You<br/>(Terminal)"] -->|docker commands| CLI["Docker CLI<br/>(command tool)"]
+    CLI -->|talks to| Engine["Docker Engine<br/>(dockerd daemon)"]
+    Engine -->|creates| Containers["Containers<br/>(running apps)"]
+    Engine -->|pulls from| Registry["Docker Hub<br/>(online image storage)"]
+    Engine -->|manages| Storage["Volumes<br/>(persistent data)"]
 ```
 
-- Docker CLI talks to the Docker Daemon (dockerd) via REST API or socket.
-- Daemon manages images, volumes, networks, and containers.
-- Registries hold images; `docker pull` downloads images and `docker push` uploads them.
+### What happens when you run `docker run myapp`:
 
-## 5. Images vs Containers
+1. You type: `docker run myapp`
+2. Docker CLI receives your command
+3. Docker Engine checks: "Do I have myapp image?"
+   - **Yes** → Run container immediately
+   - **No** → Download (pull) from Docker Hub, then run
+4. Container starts and your app runs
 
-- **Image**: immutable, read-only filesystem and metadata (like a class)
-- **Container**: writable instance of an image with its own process space (like an object)
+---
+
+## 5. Images vs Containers (Most Important!)
+
+### Cookie cutter analogy:
+
+| Image | Container |
+|-------|-----------|
+| Cookie cutter (stays the same) | Cookie (can be eaten, is unique) |
+| Blueprint/template | Running instance |
+| Read-only (doesn't change) | Can have changes |
+| 1 image creates many containers | Each container is separate |
+
+### Visual:
 
 ```mermaid
 graph LR
-    Image1[Image: myapp:1.0] --> Container1[Container: myapp-instance]
-    Image1 --> Container2[Container: myapp-instance-2]
+    Image["📋 Image: myapp:1.0<br/>(the recipe)"]
+    Image --> C1["🚀 Container 1<br/>(running myapp)"]
+    Image --> C2["🚀 Container 2<br/>(running myapp)"]
+    Image --> C3["🚀 Container 3<br/>(running myapp)"]
 ```
+
+### In programming terms:
+
+- **Image** = Class definition
+- **Container** = Object/instance of that class
 
 ## 6. Basic Docker Workflow & Commands
 
