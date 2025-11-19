@@ -16,6 +16,7 @@ Welcome — this repo is a compact course folder with short, practical lectures 
 - Lecture 4 — Shell scripting: recipes, examples, ACLs, assignment (utils + setup scripts).
 - Lecture 5 — Git basics: local vs remote vs distributed, install, init, clone, add, commit, push, log, diff, branching, and more.
 - Lecture 6 — Containerization & Docker: what is containerization, what is Docker, why use Docker, Docker architecture, images, containers, networks, volumes, and Compose.
+- Lecture 7 — Docker Volumes: tmpfs, bind mounts, Docker volumes, anonymous vs named volumes, persistence, backup/restore, best practices.
 
 ## Today's progress / study note
 
