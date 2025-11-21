@@ -82,279 +82,221 @@ You write code → Dockerfile → docker build → Image → docker run → Cont
 You build an app on your Mac with:
 - Node.js v18
 - PostgreSQL v14
-- Redis v6
-
-Your team member has:
-- Node.js v16 (different!)
-- PostgreSQL v15 (different!)
-- Redis v5 (different!)
-
-**Result**: App breaks on their machine ("works on my machine")
-
-### Solution with Docker:
-
-Package everything into a container:
-- Same Node.js version
-- Same PostgreSQL version
-- Same Redis version
-- Same everything
-
-**Result**: Works on their machine, your machine, production server, everywhere
-
-### Real benefits:
-
-1. **Consistency** — No surprises, same env everywhere
-2. **Easy deployment** — Just run the container, no installation
-3. **Microservices** — Package each service separately
-4. **Cloud-ready** — All clouds support Docker
-5. **Efficient** — Uses less resources than virtual machines
-
----
-
-## 4. Docker Architecture (How it works)
-
-### Simple flow:
-
-```
-You type:         docker run myapp
-    ↓
-You (terminal)
-    ↓
 Docker CLI (command tool)
-    ↓
-Docker Engine (daemon = software running on machine)
-    ↓
-Creates and runs a container with your app
-```
-
-### Detailed diagram:
-
-```mermaid
-graph LR
-    User["You<br/>(Terminal)"] -->|docker commands| CLI["Docker CLI<br/>(command tool)"]
-    CLI -->|talks to| Engine["Docker Engine<br/>(dockerd daemon)"]
-    Engine -->|creates| Containers["Containers<br/>(running apps)"]
-    Engine -->|pulls from| Registry["Docker Hub<br/>(online image storage)"]
-    Engine -->|manages| Storage["Volumes<br/>(persistent data)"]
-```
-
-### What happens when you run `docker run myapp`:
-
-1. You type: `docker run myapp`
-2. Docker CLI receives your command
-3. Docker Engine checks: "Do I have myapp image?"
-   - **Yes** → Run container immediately
-   - **No** → Download (pull) from Docker Hub, then run
-4. Container starts and your app runs
-
----
-
 ## 5. Images vs Containers (Most Important!)
-
-### Cookie cutter analogy:
-
-| Image | Container |
-|-------|-----------|
-| Cookie cutter (stays the same) | Cookie (can be eaten, is unique) |
-| Blueprint/template | Running instance |
-| Read-only (doesn't change) | Can have changes |
-| 1 image creates many containers | Each container is separate |
-
-### Visual:
-
-```mermaid
-graph LR
-    Image["📋 Image: myapp:1.0<br/>(the recipe)"]
-    Image --> C1["🚀 Container 1<br/>(running myapp)"]
-    Image --> C2["🚀 Container 2<br/>(running myapp)"]
     Image --> C3["🚀 Container 3<br/>(running myapp)"]
-```
 
-### In programming terms:
-
-- **Image** = Class definition
-- **Container** = Object/instance of that class
-
-## 6. Basic Docker Workflow & Commands
-
-1. Write a `Dockerfile`
-2. Build image: `docker build -t myapp:1.0 .`
-3. Run container: `docker run --name myapp -p 8080:80 myapp:1.0`
-4. Push to registry: `docker push myregistry/myapp:1.0`
-
-Common commands (examples):
-
-```bash
-# Show Docker version
 docker --version
-
-# Build image from Dockerfile
 docker build -t myapp:1.0 .
-
-# List images
 docker images
-
-# Run a container interactively
 docker run -it --name my-shell ubuntu:22.04 bash
-
-# Run detached with port mapping
 docker run -d --name web -p 8080:80 nginx:alpine
-
-# List running containers
 docker ps
-
-# List all containers
 docker ps -a
 
-# Stop & remove container
-docker stop myapp
 docker rm myapp
-
-# Remove image
 docker rmi myapp:1.0
-
-# View logs
 docker logs -f myapp
-
-# Execute command in running container
 docker exec -it myapp bash
-
-# Copy files to container
-docker cp ./config.json myapp:/app/config.json
-```
-
-### Example Dockerfile (simple web app)
-
-```Dockerfile
-# Use lightweight base image
-FROM node:18-alpine
-
-# Create app directory
-WORKDIR /app
-
-# Copy package manifests and install dependencies first (cache deps)
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copy app source
-COPY . .
-
-# Expose port and start
-EXPOSE 3000
-CMD ["node", "index.js"]
-```
-
 Build and run:
 
-```bash
-docker build -t my-node-app:1.0 .
-docker run -d --name my-node -p 3000:3000 my-node-app:1.0
-```
 
-## 7. Networking, Volumes, and Persistency
-
-- Containers are ephemeral; use **volumes** for persistent data.
-
-```bash
 # Create volume
-docker volume create data-vol
-# Run container with volume
-docker run -d -v data-vol:/var/lib/data mydb:latest
-```
 
-- Docker networks (bridge by default) allow containers to communicate.
-
-```bash
 # Create network
 docker network create mynet
-# Run containers in same network
-docker run -d --network mynet --name app1 myapp
-docker run -d --network mynet --name app2 myapp
-```
-
-## 8. Docker Compose (multi-container apps)
-
-`docker-compose.yml` example:
-
-```yaml
-version: '3.8'
-services:
-  web:
-    build: ./web
-    ports:
-      - "8080:80"
-    depends_on:
-      - api
-  api:
-    build: ./api
-    ports:
-      - "3000:3000"
-    volumes:
-      - api-data:/data
-volumes:
-  api-data:
-```
-
 Run:
+ # Lecture 6 — Docker Introduction (clear guide & quick start)
+
+This lecture gives a concise, practical introduction to containerization with Docker. It focuses on concepts you need to get started, quick commands, a minimal hands-on lab, and recommended next steps.
+
+## What you'll learn
+
+- What containers are and why they matter
+- What Docker provides (engine, CLI, images, registries)
+- A minimal install & quick-start example (build → run)
+- Key Docker commands and a cheat-sheet
+- Short notes on networking, storage, Compose and security
+
+---
+
+## 1 — Containers in one sentence
+
+Containers package an application and its dependencies so the app runs reliably across environments. They are lightweight, start fast, and share the host kernel.
+
+```mermaid
+graph LR
+  Host[Host machine (kernel)] --> Docker[Docker Engine]
+  Docker --> IMG[Image: myapp:1.0]
+  IMG --> CNT[Container: myapp-instance]
+  CNT --> Process[App process]
+```
+
+Key property: containers are processes with isolated resources (not full VMs).
+
+---
+
+## 2 — Why Docker? (short)
+
+- Reproducible environments (dev ⇄ prod)
+- Faster development iteration (start/stop in seconds)
+- Easier CI/CD and deployment (immutable artifacts)
+- Efficient resource usage vs full VMs
+
+---
+
+## 3 — Docker components (brief)
+
+- Docker Engine (daemon `dockerd`) — manages containers
+- Docker CLI (`docker`) — user tool
+- Images — read-only templates built from Dockerfile
+- Containers — running instances of images
+- Registry — image storage (Docker Hub, ECR, GCR, private)
+
+---
+
+## 4 — Install (quick commands)
+
+macOS (Docker Desktop):
+
+```bash
+# Install via Homebrew Cask
+brew install --cask docker
+```
+
+Ubuntu (Docker Engine):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Optional: allow your user to run docker without sudo
+sudo usermod -aG docker $USER
+```
+
+Verify:
+
+```bash
+docker --version
+docker compose version
+docker run --rm hello-world
+```
+
+---
+
+## 5 — Minimal hands-on lab (5 minutes)
+
+Purpose: build an image from a tiny app and run it locally.
+
+1) Create a folder `demo` and a file `index.html`:
+
+```bash
+mkdir demo && cd demo
+echo "<h1>Hello from Docker</h1>" > index.html
+```
+
+2) Create a minimal `Dockerfile`:
+
+```Dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+```
+
+3) Build and run:
+
+```bash
+docker build -t hello-nginx:1.0 .
+docker run -d --name hello -p 8080:80 hello-nginx:1.0
+# Open http://localhost:8080
+```
+
+4) Stop and remove:
+
+```bash
+docker stop hello && docker rm hello
+docker image rm hello-nginx:1.0
+```
+
+This lab demonstrates image → container lifecycle.
+
+---
+
+## 6 — Quick command cheat-sheet
+
+Basic:
+
+```bash
+docker build -t NAME:TAG .       # build image from Dockerfile
+docker run -d --name NAME -p HOST:CONTAINER IMAGE  # run detached
+docker ps                        # list running containers
+docker ps -a                     # list all containers
+docker logs -f NAME              # follow logs
+docker exec -it NAME sh          # open shell inside container
+docker stop NAME                 # stop
+docker rm NAME                   # remove container
+docker rmi IMAGE                 # remove image
+```
+
+Images & registry:
+
+```bash
+docker images
+docker pull IMAGE
+docker push IMAGE
+docker tag SOURCE TARGET
+```
+
+Compose (multi-container):
 
 ```bash
 docker compose up -d
+docker compose down
 ```
 
-Compose simplifies running multiple containers, wiring networks, and volumes locally and in CI.
+System cleanup:
 
-## 9. Orchestration (brief)
+```bash
+docker system df                 # disk usage
+docker image prune -a            # remove unused images
+docker container prune           # remove stopped containers
+```
 
-- For production at scale, use orchestration platforms like **Kubernetes** or Docker Swarm.
-- Kubernetes schedules containers (pods) across nodes, provides service discovery, autoscaling, rolling updates, and more.
+---
 
-## 10. Comparison: Containers vs Virtual Machines
+## 7 — Short notes (networking, storage, orchestration)
 
-| Feature | Virtual Machine | Container |
-|---|---:|---:|
-| Guest OS | Full guest OS per VM | Share host kernel |
-| Size | Large (GBs) | Small (MBs–hundreds MBs)
-| Boot time | Minutes | Seconds
-| Density | Fewer VMs per host | Many containers per host
-| Isolation | Strong (hardware virtualization) | Process-level isolation
+- Networking: containers use bridge networks by default; use `--network` or Docker Compose for service communication.
+- Storage: containers are ephemeral — use volumes for persistence (`-v host:container` or named volumes).
+- Orchestration: for production use Kubernetes or Docker Swarm to schedule and scale containers.
 
-## 11. Best practices
+---
 
-- Use small base images (alpine, distroless) when possible
-- Use multi-stage builds to reduce final image size
-- Pin base image versions (`node:18-alpine` → `node:18.17.1-alpine`)
-- Avoid running processes as root inside container
-- Add `.dockerignore` to exclude build artifacts
-- Keep container ephemeral; store state in volumes or external services
-- Scan images for vulnerabilities (Trivy, Clair)
-- Use immutable tags for releases and `latest` for development only
+## 8 — Security & best practices (short)
 
-## 12. Security considerations
+- Do not run processes as root inside containers. Use `USER` in Dockerfile.
+- Keep images small (use `alpine` or multi-stage builds).
+- Pin base image versions for reproducible builds.
+- Scan images for vulnerabilities (Trivy, Docker scan).
+- Use signed/private registries for sensitive artifacts.
 
-- Run least-privileged containers (non-root user)
-- Use user namespaces if supported
-- Limit container capabilities
-- Apply resource limits (CPU, memory)
-- Use signed images and private registries for sensitive code
+---
 
-## 13. Quick commands cheat-sheet
+## 9 — Where to go next (recommended)
 
-- Build: `docker build -t name:tag .`
-- Run: `docker run -d --name name -p host:container name:tag`
-- List running containers: `docker ps`
-- Remove stopped containers: `docker container prune`
-- List images: `docker images`
-- Remove dangling images: `docker image prune`
-- Compose up: `docker compose up -d`
-- Compose down: `docker compose down`
+1. Read Lecture 7 (Images internals) and 8 (Dockerfile patterns).
+2. Try the hands-on lab, then replace Nginx with a tiny Node/Go app.
+3. Add a `docker-compose.yml` with a web + redis stack.
+4. Explore `docker inspect` and `docker history` on your built image.
 
-## 14. Hands-on suggestions (practice tasks)
+---
 
-1. Build the example Dockerfile above and run the app locally.
-2. Create a `docker-compose.yml` for a simple web + redis stack.
-3. Convert a multi-stage build to reduce image size for a Go or Node app.
-4. Use `trivy` to scan your built image for vulnerabilities.
-
+End of Lecture 6 — concise Docker introduction
 ---
 
 End of Lecture 6: Docker Introduction
